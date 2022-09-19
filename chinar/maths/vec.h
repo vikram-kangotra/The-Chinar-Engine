@@ -152,7 +152,7 @@ namespace Chinar {
         : Vec<T, 2>{other}
         , x{(*this)[0]}, y{(*this)[1]} {}
         
-        Vec Angle(const Vec2<T>& other) const {
+        Vec angle(const Vec2<T>& other) const {
             T dot = (*this) * other;
             T det = x * other.y - y * other.x;
             return -atan2(det, dot);
