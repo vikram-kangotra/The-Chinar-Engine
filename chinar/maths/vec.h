@@ -102,7 +102,7 @@ namespace Chinar {
                 return ret /= val;
             }
 
-            float MagnitudeSq() const {
+            float magnitudeSq() const {
                 T ret;
                 for (const auto& d : data) {
                     ret += d*d;
@@ -110,11 +110,11 @@ namespace Chinar {
                 return ret;
             }
 
-            float Magnitude() const {
+            float magnitude() const {
                 return std::sqrt(magnitudeSq());
             }
 
-            static Vec Normalize(const Vec<T, m>& val) {
+            static Vec normalize(const Vec<T, m>& val) {
                 return val / val.magnitude();
             }
 
