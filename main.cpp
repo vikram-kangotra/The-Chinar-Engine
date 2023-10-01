@@ -13,6 +13,12 @@ int main() {
     Coordinator::getCoordinator().addComponent(entity, Transform{{100, 400}});
     Coordinator::getCoordinator().addComponent(entity, RigidBody{{6, 0}, {0, 0}});
 
+    Entity entity2 = Coordinator::getCoordinator().createEntity();
+    Coordinator::getCoordinator().addComponent(entity2, Shape{80, 80});
+    Coordinator::getCoordinator().addComponent(entity2, Color{24, 255, 0, 255});
+    Coordinator::getCoordinator().addComponent(entity2, Transform{{100, 100}});
+    Coordinator::getCoordinator().addComponent(entity2, RigidBody{{1, 1},{0, 0}});
+
     Entity entity1 = Coordinator::getCoordinator().createEntity();
     Coordinator::getCoordinator().addComponent(entity1, Shape{120, 80});
     Coordinator::getCoordinator().addComponent(entity1, Color{24, 134, 253, 255});
