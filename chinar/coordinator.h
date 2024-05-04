@@ -9,9 +9,10 @@ namespace Chinar {
 
     class Coordinator {
         public:
-            static Coordinator& getCoordinator() {
-                static Coordinator coordinator;
-                return coordinator;
+            Coordinator() {
+                componentManager = std::make_unique<ComponentManager>();
+                entityManager = std::make_unique<EntityManager>();
+                systemManager = std::make_unique<SystemManager>();
             }
 
             Entity createEntity() {
@@ -65,13 +66,6 @@ namespace Chinar {
             template <typename T>
             void setSystemSignature(Signature signature) {
                 systemManager->setSignature<T>(signature);
-            }
-
-        protected:
-            Coordinator() {
-                componentManager = std::make_unique<ComponentManager>();
-                entityManager = std::make_unique<EntityManager>();
-                systemManager = std::make_unique<SystemManager>();
             }
 
         private:

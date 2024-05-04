@@ -4,28 +4,30 @@ using namespace Chinar;
 
 int main() {
 
-    Engine::init();
-    Engine::createWorld(800, 600, "The Game");
+    Engine engine;
+    engine.createWorld(800, 600, "The Game");
 
-    Entity entity = Coordinator::getCoordinator().createEntity();
-    Coordinator::getCoordinator().addComponent(entity, Shape{100, 100});
-    Coordinator::getCoordinator().addComponent(entity, Color{255, 0, 0, 255});
-    Coordinator::getCoordinator().addComponent(entity, Transform{{100, 400}});
-    Coordinator::getCoordinator().addComponent(entity, RigidBody{{6, 0}, {0, 0}});
+    auto& coordinator = engine.getCoordinator();
 
-    Entity entity2 = Coordinator::getCoordinator().createEntity();
-    Coordinator::getCoordinator().addComponent(entity2, Shape{80, 80});
-    Coordinator::getCoordinator().addComponent(entity2, Color{24, 255, 0, 255});
-    Coordinator::getCoordinator().addComponent(entity2, Transform{{100, 100}});
-    Coordinator::getCoordinator().addComponent(entity2, RigidBody{{1, 1},{0, 0}});
+    Entity entity = coordinator.createEntity();
+    coordinator.addComponent(entity, Shape{100, 100});
+    coordinator.addComponent(entity, Color{255, 0, 0, 255});
+    coordinator.addComponent(entity, Transform{{100, 400}});
+    coordinator.addComponent(entity, RigidBody{{6, 0}, {0, 0}});
 
-    Entity entity1 = Coordinator::getCoordinator().createEntity();
-    Coordinator::getCoordinator().addComponent(entity1, Shape{120, 80});
-    Coordinator::getCoordinator().addComponent(entity1, Color{24, 134, 253, 255});
-    Coordinator::getCoordinator().addComponent(entity1, Transform{{50, 50}});
-    Coordinator::getCoordinator().addComponent(entity1, RigidBody{{5, 3},{0, 0}});
+    Entity entity2 = coordinator.createEntity();
+    coordinator.addComponent(entity2, Shape{80, 80});
+    coordinator.addComponent(entity2, Color{24, 255, 0, 255});
+    coordinator.addComponent(entity2, Transform{{100, 100}});
+    coordinator.addComponent(entity2, RigidBody{{1, 1},{0, 0}});
 
-    Engine::start();
+    Entity entity1 = coordinator.createEntity();
+    coordinator.addComponent(entity1, Shape{120, 80});
+    coordinator.addComponent(entity1, Color{24, 134, 253, 255});
+    coordinator.addComponent(entity1, Transform{{50, 50}});
+    coordinator.addComponent(entity1, RigidBody{{5, 3},{0, 0}});
+
+    engine.start();
 
     return 0;
 }

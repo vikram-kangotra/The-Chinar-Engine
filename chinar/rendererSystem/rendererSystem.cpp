@@ -7,8 +7,8 @@
 namespace Chinar {
 
     void RendererSystem::createRenderer(const Window& window, const uint32_t flags) {
-        rendererHandler = SDL_CreateRenderer(window.getWindowHandler(), -1, flags); 
-        if (rendererHandler == nullptr) {
+        rendererHandle = SDL_CreateRenderer(window.getWindowHandler(), -1, flags); 
+        if (rendererHandle == nullptr) {
             SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Failed to create RendererSystem");
         }
     }   
@@ -23,7 +23,7 @@ namespace Chinar {
     }
 
     void RendererSystem::setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-        SDL_SetRenderDrawColor(rendererHandler, r, g, b, a);
+        SDL_SetRenderDrawColor(rendererHandle, r, g, b, a);
     }
 
     void RendererSystem::setColor(SDL_Color color) {
@@ -31,23 +31,23 @@ namespace Chinar {
     }
 
     void RendererSystem::clear() {
-        SDL_RenderClear(rendererHandler);
+        SDL_RenderClear(rendererHandle);
     }
 
     void RendererSystem::present() {
-        SDL_RenderPresent(rendererHandler);
+        SDL_RenderPresent(rendererHandle);
     }
 
-    void RendererSystem::draw() {
+    void RendererSystem::draw(Coordinator& coordinator) {
         for (const auto& entity : entities) {
-            auto& shape = Coordinator::getCoordinator().getComponent<Chinar::Shape>(entity);
-            auto& transform = Coordinator::getCoordinator().getComponent<Chinar::Transform>(entity);
-            auto& color = Coordinator::getCoordinator().getComponent<Chinar::Color>(entity);
+            auto& shape = coordinator.getComponent<Chinar::Shape>(entity);
+            auto& transform = coordinator.getComponent<Chinar::Transform>(entity);
+            auto& color = coordinator.getComponent<Chinar::Color>(entity);
 
             setColor(color.getColor());
 
             SDL_Rect rect = {static_cast<int>(transform.pos.x), static_cast<int>(transform.pos.y), shape.width, shape.height};
-            SDL_RenderFillRect(rendererHandler, &rect);
+            SDL_RenderFillRect(rendererHandle, &rect);
         }
     }
 }
