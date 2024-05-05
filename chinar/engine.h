@@ -15,6 +15,7 @@
 #include "component/color.h"
 #include "component/rigidBody.h"
 #include "component/size.h"
+#include "component/scale.h"
 #include "event/eventHandlerSystem.h"
 #include "physics/physicsSystem.h"
 

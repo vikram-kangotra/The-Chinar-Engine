@@ -29,6 +29,11 @@ namespace Chinar {
             void registerComponent() {
                 componentManager->registerComponent<T>();
             }
+            
+            template <typename... T>
+            void registerComponents() {
+                (registerComponent<T>(), ...);
+            }
 
             template <typename T>
             void addComponent(Entity entity, T component) {

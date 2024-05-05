@@ -3,6 +3,7 @@
 #include "../component/shape.h"
 #include "../component/color.h"
 #include "../component/transform.h"
+#include "../component/scale.h"
 
 namespace Chinar {
 
@@ -43,10 +44,17 @@ namespace Chinar {
             auto& shape = coordinator.getComponent<Chinar::Shape>(entity);
             auto& transform = coordinator.getComponent<Chinar::Transform>(entity);
             auto& color = coordinator.getComponent<Chinar::Color>(entity);
+            auto& scale = coordinator.getComponent<Chinar::Scale>(entity);
 
             setColor(color.getColor());
 
-            SDL_Rect rect = {static_cast<int>(transform.pos.x), static_cast<int>(transform.pos.y), shape.width, shape.height};
+            SDL_Rect rect = {
+                static_cast<int>(transform.pos.x), 
+                static_cast<int>(transform.pos.y), 
+                static_cast<int>(shape.width * scale.x), 
+                static_cast<int>(shape.height * scale.y)
+            };
+
             SDL_RenderFillRect(rendererHandle, &rect);
         }
     }

@@ -18,21 +18,21 @@ namespace Chinar {
     }
 
     void Engine::registerComponents() {
-        coordinator.registerComponent<Chinar::Transform>();
-        coordinator.registerComponent<Chinar::Shape>();
-        coordinator.registerComponent<Chinar::Size>();
-        coordinator.registerComponent<Chinar::Sprite>();
-        coordinator.registerComponent<Chinar::Event>();
-        coordinator.registerComponent<Chinar::Color>();
-        coordinator.registerComponent<Chinar::RigidBody>();
+        using namespace Chinar;
+
+        coordinator.registerComponents<
+            Transform, Shape, Size, 
+            Sprite, Event, Color, 
+            RigidBody, Scale
+        >(); 
     }
 
     void Engine::registerSystems() {
         rendererSystem = coordinator.registerSystem<RendererSystem>(); 
-        coordinator.setSystemSignature<RendererSystem>(makeSignature<Shape, Color, Transform>());
+        coordinator.setSystemSignature<RendererSystem>(makeSignature<Shape, Color, Scale, Transform>());
 
         spriteRenderer = coordinator.registerSystem<SpriteRenderer>();
-        coordinator.setSystemSignature<SpriteRenderer>(makeSignature<Sprite, Size, Transform>());
+        coordinator.setSystemSignature<SpriteRenderer>(makeSignature<Sprite, Size, Scale, Transform>());
 
         eventHandlerSystem = coordinator.registerSystem<EventHandlerSystem>();
 
